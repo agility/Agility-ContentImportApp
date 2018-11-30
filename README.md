@@ -30,7 +30,7 @@ Each method returns a JSON string in the following formats --
 ```
 It's up to your code to check for IsError, in addition to any other exceptions that may occur within the method.
 
-```charp
+```csharp
 string jsonStr = JsonConvert.SerializeObject(obj);
  
 string retStr = ServerAPI.SaveContentItem(-1, "MyContent", "en-us", jsonStr, null);
@@ -52,12 +52,12 @@ In order to convert your ResponseData to a strongly typed object, you must defin
 
 **Deserialize ResponseData to strongly-typed object:**
 
-```chsarp
+```csharp
 APIResult<YourType> retObj = JsonConvert.DeserializeObject<APIResult<YourType>>(retStr);
 ```
 
 Or, you can convert to a dynamic object for simplicity:
-```chsarp
+```csharp
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
 ```
 
@@ -134,7 +134,7 @@ else
 Get a content item given a contentID and languageCode.  Returns an object in the ResponseData.
 string retStr = ServerAPI.GetContentItem(contentID, "en-us");
 
-```chsarp
+```csharp
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
 if (retObj.IsError)
 {
@@ -150,7 +150,7 @@ else
 **DeleteContent(int contentID, string languageCode)**
 Deletes a content item given a contentID and languageCode. Does not return a value in the ReponseData.
 
-```chsarp
+```csharp
 string retStr = ServerAPI.DeleteContent(123, "en-us");
 APIResult retObj = JsonConvert.DeserializeObject<APIResult>(retStr);
 if (retObj.IsError) { //handle error }
@@ -159,7 +159,7 @@ if (retObj.IsError) { //handle error }
 RequestApproval(int contentID, string languageCode)
 Requests approval for a content item given a contentID and languageCode. Returns an integer in the ReponseData.
 
-```chsarp
+```csharp
 string retStr = ServerAPI.RequestApproval(123, "en-us");
 APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
 if (retObj.IsError) { //handle error }
@@ -168,7 +168,7 @@ if (retObj.IsError) { //handle error }
 **SaveContentItem(int contentID, string languageCode, string referenceName, string contentItemEncoded, string attachmentsEncoded)**
 Saves a content item based on contentID, languageCode, referenceName. Returns an integer representing the content item in the ResponseData.
 
-```chsarp
+```csharp
 var contentItem =  new {
     Title = "Test item 1",        
     Date = new DateTime(2012, 10, 26),
@@ -209,7 +209,7 @@ else
 **PublishContent(int contentID, string languageCode)**
 Publish a content item given a specific contentID and languageCode. The same contentID should be returned on success in the ReponseData.
 
-```chsarp
+```csharp
 string retStr = ServerAPI.PublishContent(123, "en-us");
 APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
 if (retObj.IsError)
@@ -225,7 +225,7 @@ else
 **UploadMedia(string mediaFolder, string fileName, string contentType, Stream fileData)**
 Upload a file to the Media & Documents section of Agility to the specified folder. Returns an object representing the media uploaded.
 
-```chsarp
+```csharp
 Stream s = Request.Files[0].InputStream;
 string filename = Path.GetFileName(Request.Files[0].FileName);
 string contentType = Request.Files[0].ContentType;
