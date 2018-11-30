@@ -1,4 +1,4 @@
-# Content Import
+# Agility Content Import API & SDK
 A .NET console application showcasing how to import content into Agility.
 
 ## About the API
