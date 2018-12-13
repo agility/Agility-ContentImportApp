@@ -1,17 +1,17 @@
-# Content Import
+# Agility Content Import API & SDK
 A .NET console application showcasing how to import content into Agility.
 
 ## About the API
-When you need to save web content into Agility for an import, you can use the Content Import API to do so.  It is a JSON API specifically created to allow you to save items into the Shared Content section of Agility.  This can be useful for doing complex content imports at the start of a project, or for keeping Agility content in sync with an outside system.  It is not meant to be used on a regular basis to replace the functions of the content manager. 
+When you need to save web content into Agility for an import, you can use the Content Import API to do so.Â  It is a JSON API specifically created to allow you to save items into the Shared Content section of Agility.Â  This can be useful for doing complex content imports at the start of a project, or for keeping Agility content in sync with an outside system.Â  It is not meant to be used on a regular basis to replace the functions of the content manager.Â 
 
-Each of these calls works by sending and receiving JSON strings to the server. 
+Each of these calls works by sending and receiving JSON strings to the server.Â 
 
 Before you start, make sure you are using the latest version of the Agility.Web dll, available from the Developer Downloads section of the Agility Content Manager Settings screen or nuget.
 
 Each method returns a JSON string in the following formats --
 
 **A single object result:**
-``` csharp
+```csharp
 {
   IsError: [true/false],
   Message: [if an error occurred, not null],
@@ -19,7 +19,7 @@ Each method returns a JSON string in the following formats --
 }
 ```
 **A list result:**
-``` csharp
+```csharp
 {
   IsError: [true/false],
   Message: [if an error occurred, not null],
@@ -30,7 +30,7 @@ Each method returns a JSON string in the following formats --
 ```
 It's up to your code to check for IsError, in addition to any other exceptions that may occur within the method.
 
-``` charp
+```csharp
 string jsonStr = JsonConvert.SerializeObject(obj);
  
 string retStr = ServerAPI.SaveContentItem(-1, "MyContent", "en-us", jsonStr, null);
@@ -44,20 +44,20 @@ if (retObj.IsError)
 }
 ```
 
-We recommend the JSON.Net library for serialization. 
+We recommend the JSON.Net library for serialization.Â 
 
 In order to convert your ResponseData to a strongly typed object, you must define that in the Deserialization settings when converting the string to a C# object.
 
- 
+Â 
 
 **Deserialize ResponseData to strongly-typed object:**
 
-``` chsarp
+```csharp
 APIResult<YourType> retObj = JsonConvert.DeserializeObject<APIResult<YourType>>(retStr);
- ```
+```
 
 Or, you can convert to a dynamic object for simplicity:
-``` chsarp
+```csharp
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
 ```
 
@@ -69,7 +69,7 @@ In order to use the Content Import API, you need to have the Agility.Web SDK ins
 In addition to the Agility.Web SDK being installed, you'll also need to have an Agility.Web section added to your web.config or app.config (depending on the nature of your .NET project). This is used for authentication.
 
 **In app/web.config:**
-``` xml
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <configSections>
@@ -90,12 +90,12 @@ In addition to the Agility.Web SDK being installed, you'll also need to have an 
 ...
 </configuration>
 ```
- 
+Â 
 
 ## Methods
 **GetContentItems(Agility.Web.Objects.ServerAPI.GetContentItemArgs arg)**
 Gets a listing of content items based on the GetContentItemArgs parameter. You must include ALL the columns you want to be returned, otherwise, they will be not be returned. Returns an array on the ResponseData.
-``` csharp
+```csharp
 string retStr = ServerAPI.GetContentItems(
         new Agility.Web.Objects.ServerAPI.GetContentItemArgs()
         {
@@ -131,10 +131,10 @@ else
 ```
 
 **GetContentItem(int contentID, string languageCode)**
-Get a content item given a contentID and languageCode.  Returns an object in the ResponseData.
+Get a content item given a contentID and languageCode.Â  Returns an object in the ResponseData.
 string retStr = ServerAPI.GetContentItem(contentID, "en-us");
 
-``` chsarp
+```csharp
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
 if (retObj.IsError)
 {
@@ -150,16 +150,16 @@ else
 **DeleteContent(int contentID, string languageCode)**
 Deletes a content item given a contentID and languageCode. Does not return a value in the ReponseData.
 
-``` chsarp
+```csharp
 string retStr = ServerAPI.DeleteContent(123, "en-us");
 APIResult retObj = JsonConvert.DeserializeObject<APIResult>(retStr);
 if (retObj.IsError) { //handle error }
- ```
+Â ```
 
 RequestApproval(int contentID, string languageCode)
 Requests approval for a content item given a contentID and languageCode. Returns an integer in the ReponseData.
 
-``` chsarp
+```csharp
 string retStr = ServerAPI.RequestApproval(123, "en-us");
 APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
 if (retObj.IsError) { //handle error }
@@ -168,7 +168,7 @@ if (retObj.IsError) { //handle error }
 **SaveContentItem(int contentID, string languageCode, string referenceName, string contentItemEncoded, string attachmentsEncoded)**
 Saves a content item based on contentID, languageCode, referenceName. Returns an integer representing the content item in the ResponseData.
 
-``` chsarp
+```csharp
 var contentItem =  new {
     Title = "Test item 1",        
     Date = new DateTime(2012, 10, 26),
@@ -209,7 +209,7 @@ else
 **PublishContent(int contentID, string languageCode)**
 Publish a content item given a specific contentID and languageCode. The same contentID should be returned on success in the ReponseData.
 
-``` chsarp
+```csharp
 string retStr = ServerAPI.PublishContent(123, "en-us");
 APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
 if (retObj.IsError)
@@ -225,7 +225,7 @@ else
 **UploadMedia(string mediaFolder, string fileName, string contentType, Stream fileData)**
 Upload a file to the Media & Documents section of Agility to the specified folder. Returns an object representing the media uploaded.
 
-``` chsarp
+```csharp
 Stream s = Request.Files[0].InputStream;
 string filename = Path.GetFileName(Request.Files[0].FileName);
 string contentType = Request.Files[0].ContentType;
@@ -245,3 +245,5 @@ else
     int size = retObj.ResponseData.Size;
 }
 ```
+
+View Docs in [Help Center](https://help.agilitycms.com/hc/en-us/articles/360020079532)
