@@ -245,5 +245,21 @@ else
     int size = retObj.ResponseData.Size;
 }
 ```
+**GetSitemap(string languageCode)**
+Retreives a list of page items from the page tree in Agility.
 
+```csharp
+string retStr = ServerAPI.GetSitemap("en-us");
+Console.WriteLine(retStr);
+APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
+
+if (retObj.IsError)
+{
+    //handle error
+} else {
+  var channelsList = retObj.ResponseData;
+  var channelPages = retObj.ResponseData[0].Pages;
+  var pageUrl = retObj.ResponseData[0].Pages.URL;
+}
+```
 View Docs in [Help Center](https://help.agilitycms.com/hc/en-us/articles/360020079532)
