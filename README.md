@@ -246,7 +246,7 @@ else
 }
 ```
 **GetSitemap(string languageCode)**
-Retreives a list of page items from the page tree in Agility.
+Retrieves a list of page items from the page tree in Agility.
 
 ```csharp
 string retStr = ServerAPI.GetSitemap("en-us");
