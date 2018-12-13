@@ -16,16 +16,21 @@ namespace AgilityContentImportConsoleApp
         {
             //Not working? Did you set your websiteName and securityKey in the app.config?
 
+            //Get Page Sitemap
+            GetSitemap();
+
+            //Get Content
             GetContentItems();
             GetContentItem(contentID: 6511);
 
             //New
-            SaveContentItem(contentID: -1);
+            //SaveContentItem(contentID: -1);
 
             //Update
-            SaveContentItem(contentID: 6511);
+            //SaveContentItem(contentID: 6511);
 
-            PublishContent(contentID: 6511);
+            //Publish
+            //PublishContent(contentID: 6511);
 
 
             Console.WriteLine("Script finished, press any key to exit...");
@@ -184,6 +189,7 @@ namespace AgilityContentImportConsoleApp
             string retStr = ServerAPI.PublishContent(contentID, "en-us");
             Console.WriteLine(retStr);
             APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
+
             if (retObj.IsError)
             {
                 //handle error
@@ -196,6 +202,21 @@ namespace AgilityContentImportConsoleApp
             return contentID;
         }
 
+        static void GetSitemap()
+        {
+            Console.WriteLine("Retrieveing latest page items...");
+
+            string retStr = ServerAPI.GetSitemap("en-us");
+            Console.WriteLine(retStr);
+            APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
+
+            if (retObj.IsError)
+            {
+                //handle error
+            }
+
+            return;
+        }
     }
 
 
