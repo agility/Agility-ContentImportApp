@@ -109,7 +109,20 @@ string retStr = ServerAPI.GetContentItems(
             sortDirection = "DESC"
         }
     );
-              
+
+/*
+ Search Filter syntax:
+ To search for a non-reserved property value (a custom field):
+    x.xmlData.value('(CI/I/IntTest)[1]', 'int') > 1 //IntTest field, cast to an int
+    x.xmlData.value('(CI/I/MyString)[1]', 'nvarchar') = 'My Test' //MyString, cast to a string
+ To search for Title (reserved property name):
+    x.Title = 'this is a title'
+ To search for TextBlob (reserved property name):
+    x.TextBlob = 'this is a textblob'
+ To search for state:
+    state = 'Staging'
+ */
+
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
  
 if (retObj.IsError)
