@@ -112,16 +112,18 @@ string retStr = ServerAPI.GetContentItems(
 
 /*
  Search Filter syntax:
+ You must include the column name you want to retrieve/filter by in your 'columns'
  To search for a non-reserved property value (a custom field):
-    x.xmlData.value('(CI/I/IntTest)[1]', 'int') > 1 //IntTest field, cast to an int
-    x.xmlData.value('(CI/I/MyString)[1]', 'nvarchar') = 'My Test' //MyString, cast to a string
+    WHERE x.xmlData.value('(CI/I/IntTest)[1]', 'int') > 1 //IntTest field, cast to an int
+    WHERE x.xmlData.value('(CI/I/MyString)[1]', 'nvarchar(max)') = 'My Test' //MyString, cast to a string
  To search for Title (reserved property name):
-    x.Title = 'this is a title'
+    WHERE x.Title = 'this is a title'
  To search for TextBlob (reserved property name):
-    x.TextBlob = 'this is a textblob'
- To search for state:
-    state = 'Staging'
+    WHERE x.TextBlob = 'this is a textblob'
+ To search for state (Staging,Published,Deleted,Approved,AwaitingApproval,Declined,Unpublished):
+    WHERE s.state = 'Staging'
  */
+    
 
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
  
