@@ -237,6 +237,22 @@ else
 }
 ```
 
+**UnpublishContent(int contentID, string languageCode)**
+Unpublish a content item given a specific contentID and languageCode. The same contentID should be returned on success in the ReponseData.
+
+```csharp
+string retStr = ServerAPI.UnpublishContent(123, "en-us");
+APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
+if (retObj.IsError)
+{
+    //handle error
+}
+else
+{
+    int contentID = retObj.ResponseData;
+}
+```
+
 **UploadMedia(string mediaFolder, string fileName, string contentType, Stream fileData)**
 Upload a file to the Media & Documents section of Agility to the specified folder. Returns an object representing the media uploaded.
 
