@@ -17,11 +17,11 @@ namespace AgilityContentImportConsoleApp
             //Not working? Did you set your websiteName and securityKey in the app.config?
 
             //Get Page Sitemap
-            GetSitemap();
+            //GetSitemap();
 
             //Get Content
-            GetContentItems();
-            GetContentItem(contentID: 6511);
+            //GetContentItems();
+            //GetContentItem(contentID: 6511);
 
             //New
             //SaveContentItem(contentID: -1);
@@ -32,6 +32,8 @@ namespace AgilityContentImportConsoleApp
             //Publish
             //PublishContent(contentID: 6511);
 
+            //Unpublish
+            UnpublishContent(6511);
 
             Console.WriteLine("Script finished, press any key to exit...");
             Console.ReadKey();
@@ -187,6 +189,25 @@ namespace AgilityContentImportConsoleApp
         {
             Console.WriteLine("Publishing content item...");
             string retStr = ServerAPI.PublishContent(contentID, "en-us");
+            Console.WriteLine(retStr);
+            APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
+
+            if (retObj.IsError)
+            {
+                //handle error
+            }
+            else
+            {
+                contentID = retObj.ResponseData;
+            }
+
+            return contentID;
+        }
+
+        static int UnpublishContent(int contentID)
+        {
+            Console.WriteLine("Unpublishing content item...");
+            string retStr = ServerAPI.UnpublishContent(contentID, "en-us");
             Console.WriteLine(retStr);
             APIResult<int> retObj = JsonConvert.DeserializeObject<APIResult<int>>(retStr);
 

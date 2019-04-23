@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Agility.Web, Version=5.0.1811.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Agility.Web.5.0.1811.3\lib\net461\Agility.Web.dll</HintPath>
+    <Reference Include="Agility.Web, Version=5.0.1904.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Agility.Web.5.0.1904.1\lib\net461\Agility.Web.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
