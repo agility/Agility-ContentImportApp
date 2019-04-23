@@ -109,7 +109,22 @@ string retStr = ServerAPI.GetContentItems(
             sortDirection = "DESC"
         }
     );
-              
+
+/*
+ Search Filter syntax:
+ You must include the column name you want to retrieve/filter by in your 'columns'
+ To search for a non-reserved property value (a custom field):
+    WHERE x.xmlData.value('(CI/I/IntTest)[1]', 'int') > 1 //IntTest field, cast to an int
+    WHERE x.xmlData.value('(CI/I/MyString)[1]', 'nvarchar(max)') = 'My Test' //MyString, cast to a string
+ To search for Title (reserved property name):
+    WHERE x.Title = 'this is a title'
+ To search for TextBlob (reserved property name):
+    WHERE x.TextBlob = 'this is a textblob'
+ To search for state (Staging,Published,Deleted,Approved,AwaitingApproval,Declined,Unpublished):
+    WHERE s.state = 'Staging'
+ */
+    
+
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
  
 if (retObj.IsError)
@@ -245,5 +260,21 @@ else
     int size = retObj.ResponseData.Size;
 }
 ```
+**GetSitemap(string languageCode)**
+Retrieves a list of page items from the page tree in Agility.
 
+```csharp
+string retStr = ServerAPI.GetSitemap("en-us");
+Console.WriteLine(retStr);
+APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
+
+if (retObj.IsError)
+{
+    //handle error
+} else {
+  var channelsList = retObj.ResponseData;
+  var channelPages = retObj.ResponseData[0].Pages;
+  var pageUrl = retObj.ResponseData[0].Pages.URL;
+}
+```
 View Docs in [Help Center](https://help.agilitycms.com/hc/en-us/articles/360020079532)
