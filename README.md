@@ -147,9 +147,9 @@ else
 
 **GetContentItem(int contentID, string languageCode)**
 Get a content item given a contentID and languageCode.  Returns an object in the ResponseData.
-string retStr = ServerAPI.GetContentItem(contentID, "en-us");
 
 ```csharp
+string retStr = ServerAPI.GetContentItem(contentID, "en-us");
 APIResult<dynamic> retObj = JsonConvert.DeserializeObject<APIResult<dynamic>>(retStr);
 if (retObj.IsError)
 {
